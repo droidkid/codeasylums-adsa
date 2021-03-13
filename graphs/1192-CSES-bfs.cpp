@@ -10,6 +10,7 @@ vector<string> maze;
 void bfsAndMarkConnected(int x, int y) {
 
     queue<pii> q;
+    maze[x][y] = '*';
     q.push(pii(x, y));
 
     while (!q.empty()) {
@@ -19,7 +20,11 @@ void bfsAndMarkConnected(int x, int y) {
         int x = curr.first;
         int y = curr.second;
 
-        maze[x][y] = '*'; // This is visited now.
+
+        // Be careful where you mark as visited.
+        // Marking it here, will result in node being added 
+        // multiple times to queue.
+        // maze[nx][ny] = '*';
 
         // Try to push unvisited neighbours onto queue.
         int dx[] = {0, 0, 1, -1};
@@ -33,6 +38,7 @@ void bfsAndMarkConnected(int x, int y) {
          if (ny < 0 || ny >= maze[0].size()) continue;
          if (maze[nx][ny] == '#') continue; // It's a wall.
          if (maze[nx][ny] == '*') continue; // It's been visited before.
+         maze[nx][ny] = '*';
          q.push(pii(nx, ny));
         }
     }
