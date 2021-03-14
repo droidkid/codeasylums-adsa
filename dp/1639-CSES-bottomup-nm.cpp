@@ -16,43 +16,46 @@ int main() {
             dp[i][j] = 1000000;
         }
     }
+    //
  
  
-    for (int i=n; i>=0; i--) {
-        for (int j=m; j>=0; j--) {
+    for (int i=0; i<=n; i++) {
+        for (int j=0; j<=m; j++) {
  
-            if (i==n && j==m) {
+            if (i==0 && j==0) {
                 dp[i][j] = 0;
                 continue;
             }
  
-            if (i==n) {
-                dp[i][j] = 1 + dp[i][j+1];
+            if (i==0) {
+                dp[i][j] = 1 + dp[i][j-1];
                 continue;
             }
  
-            if (j==m) {
-                dp[i][j] = 1 + dp[i+1][j];
+            if (j==0) {
+                dp[i][j] = 1 + dp[i-1][j];
                 continue;
             }
  
-            if (s1[i] == s2[j]) {
-                dp[i][j] = min(dp[i][j], dp[i+1][j+1]);
+            if (s1[i-1] == s2[j-1]) {
+                dp[i][j] = min(dp[i][j], dp[i-1][j-1]);
             }
             // This represents
             // adding a character to second string
             // or removing a character from first string.
-            dp[i][j] = min(dp[i][j], 1 + dp[i+1][j]);
+            dp[i][j] = min(dp[i][j], 1 + dp[i-1][j]);
  
             // This represents
             // adding a character to first string
             // or removing a character from second string.
-            dp[i][j] = min(dp[i][j], 1 + dp[i][j+1]);
+            dp[i][j] = min(dp[i][j], 1 + dp[i][j-1]);
  
             // This is basically replacing one of the characters to
             // match the others.
-            dp[i][j] = min(dp[i][j], 1 + dp[i+1][j+1]);
+            dp[i][j] = min(dp[i][j], 1 + dp[i-1][j-1]);
         }
     }
-    cout<<dp[0][0]<<endl;
+ 
+ 
+    cout<<dp[n][m]<<endl;
 }
