@@ -75,6 +75,4 @@ int main() {
         cout<<dist[i]<<" ";
     }
     cout<<endl;
-
-
 }
