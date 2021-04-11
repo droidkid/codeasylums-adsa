@@ -56,7 +56,6 @@ int main() {
             ans = min(ans, arr[idx]);
             idx++;
         }
-
         cout<<ans<<endl;
     }
 }
